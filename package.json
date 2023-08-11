@@ -1,0 +1,71 @@
+{
+  "name": "@pija-ab/vercel-ext",
+  "version": "1.0.2",
+  "description": "A wrapper for the vercel CLI that allows you to configure the organization and project id in a config file.",
+  "type": "module",
+  "private": false,
+  "exports": {
+    ".": {
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js",
+      "types": "./lib/types/index.d.ts"
+    },
+    "./*": {
+      "import": "./lib/esm/*.js",
+      "require": "./lib/cjs/*.js",
+      "types": "./lib/types/*.d.ts"
+    }
+  },
+  "directories": {
+    "bin": "./bin",
+    "lib": "./lib",
+    "src": "./src"
+  },
+  "files": [
+    "lib",
+    "bin"
+  ],
+  "main": "/lib/cjs/VercelRunner.js",
+  "keywords": [],
+  "author": "Linn Dahlgren",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PiJaAB/vercel-ext.git"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^16.1.0",
+    "@types/node": "^20.4.4",
+    "rimraf": "^5.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6",
+    "vercel": "^31.1.0"
+  },
+  "peerDependencies": {
+    "@types/node": "*",
+    "vercel": "*"
+  },
+  "peerDependenciesMeta": {
+    "@types/node": {
+      "optional": true
+    }
+  },
+  "bin": {
+    "vercel-pull-envs": "./bin/vercel-pull-envs.js",
+    "vc-pull-envs": "./bin/vercel-pull-envs.js",
+    "vc-ext": "./bin/vercel-ext.js",
+    "vercel-ext": "./bin/vercel-ext.js"
+  },
+  "dependencies": {
+    "ansi-regex": "^6.0.1",
+    "strip-ansi": "^7.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "pnpm run build:clean && pnpm run build:tsc",
+    "build:clean": "rimraf dist",
+    "build:tsc": "tsc --build esm esm/extra cjs cjs/extra types types/extra"
+  }
+}
